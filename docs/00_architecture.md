@@ -24,5 +24,12 @@ Alternatives: OAuth2 Custom API requires authenticated callers, unsuitable for a
 - Published Creator add: `POST https://<base_url>/creator/v2.1/publish/<owner>/<app_link_name>/form/<form_link_name>?privatelink=...`; production-only; no OAuth scope documented for this public link flow.
 - Copy generated Custom API URL from Creator; do not guess it. Account region determines host.
 
-## What needs Zoho UI
-[UI-ONLY] Create app/forms, upload three dummy SMFs, create OAuth connection + Custom API, create/publish Commerce store and obtain actual preview URL. [CODE] Files provide setup and code starters. Verify actual Commerce theme selectors and CORS before publish. No live URL or recording is invented.
+## Live trial progress (19 Nov 2026)
+- Creator has three fictional plant records with attached dummy SMF PDFs, the on-create Node ID workflow, and `Commerce_Product_ID` / `Sync_Status` fields.
+- Commerce currently lists three masked products (`Tablets - NODE-BD-01`, `Injectables - NODE-GJ-02`, `Tablets - NODE-HP-03`) with zero price.
+- Connection **JollyRX Commerce Masked Catalog Sync** is authorized and enabled for `JollyRx Private Vault`; allowed actions are exactly Create Product and Update Product. Link name: `jollyrx_commerce_masked_catalog_sync`.
+- Commerce account route/domain observed: ID `60096889911`, trial domain `demo-60096889911.zohoecommerce.in`. Confirm the API organization ID in Commerce settings before configuring the Deluge header.
+- Not yet live or verified: Creator→Commerce on-submit API call, public RFQ Custom API, Commerce RFQ overlay, themed JOLLYRX storefront, public endpoint leak test, and two-way RFQ logging. Do not claim these are working until they are visibly demonstrated.
+
+## What still needs Zoho UI
+[UI-ONLY] Confirm Commerce API organization ID, configure and test the Deluge sync workflow, create RFQ_Inquiries and its lookup, create and validate the Creator Custom API, add the RFQ modal CSS/JS in the active theme, preview the JOLLYRX visual style, and run the public leak/CORS checks. The store has seed catalog entries but that is not proof of API sync. No recording or verified preview URL is claimed yet.
