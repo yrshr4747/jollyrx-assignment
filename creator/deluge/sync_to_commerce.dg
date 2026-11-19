@@ -1,0 +1,26 @@
+// Plant_Vault on success; connection commerce_oauth; configure base URL/org ID.
+// ONLY masked fields enter the Commerce payload. Verify API's required variant schema first.
+try
+{
+ p = Map();
+ p.put("name", input.Dosage_Form + " - " + input.Masked_Node_ID);
+ p.put("product_type", "goods");
+ p.put("product_short_description", "Node: " + input.Masked_Node_ID + " | Dosage Form: " + input.Dosage_Form + " | Certification: " + input.Certification + " | MOQ: " + input.MOQ);
+ p.put("product_description", "Anonymized Node ID: " + input.Masked_Node_ID + "\nDosage Form: " + input.Dosage_Form + "\nCertification: " + input.Certification + "\nMOQ: " + input.MOQ);
+ p.put("show_in_storefront", "true");
+ body = Map(); body.put("product",p);
+ h = Map(); h.put("X-com-zoho-store-organizationid","{{COMMERCE_ORG_ID}}");
+ if(input.Commerce_Product_ID == null || input.Commerce_Product_ID == "")
+ {
+  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products" type:POST parameters:body.toString() headers:h connection:"commerce_oauth"];
+ }
+ else
+ {
+  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products/" + input.Commerce_Product_ID type:PUT parameters:body.toString() headers:h connection:"commerce_oauth"];
+ }
+ // Map ID only after confirming current tenant's response JSON shape.
+ if(resp.get("code") == 0 && resp.get("product") != null)
+ { input.Commerce_Product_ID = resp.get("product").get("product_id"); input.Sync_Status = "Synced"; }
+ else { input.Sync_Status = "Failed: inspect workflow log"; info resp; }
+}
+catch(e) { input.Sync_Status = "Failed: inspect workflow log"; info e; }

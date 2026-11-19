@@ -1,0 +1,14 @@
+(() => {
+ const API="{{CREATOR_CUSTOM_API_ENDPOINT}}", KEY="{{CREATOR_PUBLIC_KEY}}"; // Publicly visible: rotate/monitor abuse.
+ const sels=[".product-card",".product-item","[class*='product-card']",".product-detail","[class*='product-detail']"];
+ const txt=e=>(e?.innerText||e?.textContent||"").trim();
+ function node(card){return (txt(card).match(/NODE-[A-Z]{2}-\d{2}/)||[""])[0]}
+ function modal(id){if(!id)return;document.querySelector(".jrx-rfq-modal")?.remove();let w=document.createElement("div");w.className="jrx-rfq-modal";
+ w.innerHTML=`<section class="jrx-rfq-dialog" role="dialog" aria-modal="true" aria-labelledby="rfqt"><button data-close aria-label="Close">×</button><h2 id="rfqt">RFQ</h2><p>${id}</p><form><label>Buyer Name<input name="Buyer_Name" required maxlength="120"></label><label>Email<input name="Email" type="email" required></label><label>Target Qty<input name="Target_Quantity" type="number" min="1" step="1" required></label><input name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px"><button class="jrx-rfq-button">RFQ Submit</button><p role="status" aria-live="polite"></p></form></section>`;document.body.append(w);
+ w.querySelector("[data-close]").onclick=()=>w.remove();w.onclick=e=>{if(e.target===w)w.remove()};let f=w.querySelector("form"),b=f.querySelector("button[type=submit]"),s=f.querySelector("[role=status]"),busy=false;
+ f.onsubmit=async e=>{e.preventDefault();if(busy||!f.reportValidity())return;busy=true;b.disabled=true;b.textContent="Submitting…";let d=Object.fromEntries(new FormData(f));d.Node_ID=id;
+ try{let r=await fetch(`${API}?publickey=${encodeURIComponent(KEY)}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({payload:JSON.stringify(d)})});if(!r.ok)throw Error();let x=await r.json();if(!x.ok)throw Error();s.textContent="RFQ received.";f.reset()}catch(_){s.textContent="Could not submit. Please retry."}finally{busy=false;b.disabled=false;b.textContent="RFQ Submit"}};
+ }
+ function install(){for(const sel of sels)document.querySelectorAll(sel).forEach(c=>{if(c.querySelector(".jrx-rfq-button"))return;let n=node(c);if(!n)return;let b=document.createElement("button");b.className="jrx-rfq-button";b.type="button";b.textContent="Request Quote (RFQ)";b.onclick=()=>modal(n);c.append(b)});document.querySelectorAll("button,a").forEach(e=>{if(/add to cart|buy now/i.test(txt(e)))e.hidden=true});document.documentElement.classList.add("jrx-ready")}
+ new MutationObserver(install).observe(document.documentElement,{childList:true,subtree:true});install();
+})();

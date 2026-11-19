@@ -1,0 +1,6 @@
+/* Theme selectors are starters: inspect actual Commerce DOM. Hide from first paint. */
+:root{--jrx-navy:#101a31;--jrx-cyan:#22c4f2;--jrx-magenta:#e63bd8}
+html:not(.jrx-ready) .price,html:not(.jrx-ready) [class*="price"],.product-price,.compare-at-price,[class*="compare-price"],.quantity-selector,.quantity,button[name*="add"],[class*="add-to-cart"],[class*="buy-now"],.cart-icon,[class*="cart-icon"],.quick-view [class*="price"],.search-results [class*="price"]{display:none!important}
+body{background:var(--jrx-navy);color:#f7f9ff}header,.site-header,footer{background:var(--jrx-navy)}
+.jrx-rfq-button{background:linear-gradient(100deg,var(--jrx-cyan),var(--jrx-magenta));color:#081326;border:0;border-radius:8px;padding:.75rem 1rem;font-weight:700;cursor:pointer}
+.jrx-rfq-modal{position:fixed;inset:0;z-index:999999;display:grid;place-items:center;background:#070d1dcc}.jrx-rfq-dialog{width:min(92vw,420px);background:#17233d;border:1px solid var(--jrx-magenta);border-radius:14px;padding:1.4rem;color:#fff}.jrx-rfq-dialog label{display:block;margin:.8rem 0}.jrx-rfq-dialog input{width:100%;padding:.7rem;box-sizing:border-box}

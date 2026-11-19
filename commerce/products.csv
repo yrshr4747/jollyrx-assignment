@@ -1,0 +1,4 @@
+Product Name,SKU,Product Type,Short Description,Description,Rate,Stock,Status
+Tablets - NODE-BD-01,NODE-BD-01,Goods,"Node: NODE-BD-01 | Dosage Form: Tablets | Certification: WHO-GMP | MOQ: 5000","Node NODE-BD-01; Tablets; WHO-GMP; MOQ 5000",0,0,Active
+Injectables - NODE-GJ-02,NODE-GJ-02,Goods,"Node: NODE-GJ-02 | Dosage Form: Injectables | Certification: Schedule M | MOQ: 2000","Node NODE-GJ-02; Injectables; Schedule M; MOQ 2000",0,0,Active
+Tablets - NODE-HP-03,NODE-HP-03,Goods,"Node: NODE-HP-03 | Dosage Form: Tablets | Certification: WHO-GMP | MOQ: 10000","Node NODE-HP-03; Tablets; WHO-GMP; MOQ 10000",0,0,Active

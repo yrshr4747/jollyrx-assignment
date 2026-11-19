@@ -1,0 +1,4 @@
+# Leak test and RFQ verification
+Run `STORE_URL='https://YOUR_PREVIEW' ./qa/leak_test.sh`. Zero matches expected for real names, addresses, licenses, SMF markers and Molecule canaries. The crawl is bounded to same-origin linked HTML/assets; manually inspect product API/network responses, SEO, image names/alt text and dynamic routes. Confirm public Custom API accepts only Buyer_Name, Email, Target_Quantity, Node_ID plus honeypot and returns only `{ok,message}`. Test bad email, zero/huge qty, unknown node, oversized name and filled honeypot.
+
+Manual bidirectional check: Creator create/update -> show generated Node ID, sync status/product ID, and inspect outgoing payload has only four allowed catalog fields. Commerce card -> Request Quote (RFQ) -> submit -> success -> Creator RFQ_Inquiries row has correct Node_ID lookup. Check four confidential classes including SMF never reach Commerce or public response.
