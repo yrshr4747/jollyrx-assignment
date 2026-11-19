@@ -1,22 +1,32 @@
-// Plant_Vault on success; connection commerce_oauth; configure base URL/org ID.
-// ONLY masked fields enter the Commerce payload. Verify API's required variant schema first.
+// Plant_Vault on success; connection commerce_oauth; configure India DC base URL/org ID.
+// Required Commerce API fields (name/url/variants) are included. Only masked
+// catalog data and the Node ID SKU enter the product payload. Rate is zero for
+// quote-only items; hide price/cart in the storefront and verify before publish.
 try
 {
  p = Map();
- p.put("name", input.Dosage_Form + " - " + input.Masked_Node_ID);
- p.put("product_type", "goods");
- p.put("product_short_description", "Node: " + input.Masked_Node_ID + " | Dosage Form: " + input.Dosage_Form + " | Certification: " + input.Certification + " | MOQ: " + input.MOQ);
- p.put("product_description", "Anonymized Node ID: " + input.Masked_Node_ID + "\nDosage Form: " + input.Dosage_Form + "\nCertification: " + input.Certification + "\nMOQ: " + input.MOQ);
- p.put("show_in_storefront", "true");
- body = Map(); body.put("product",p);
+ node = input.Masked_Node_ID;
+ title = input.Dosage_Form + " - " + node;
+ p.put("name", title);
+ p.put("url", node.toLowerCase());
+ p.put("product_short_description", "Anonymized Node ID: " + node + " | Dosage Form: " + input.Dosage_Form + " | Certification: " + input.Certification + " | MOQ: " + input.MOQ);
+ p.put("product_description", "Anonymized Node ID: " + node + "\nDosage Form: " + input.Dosage_Form + "\nCertification: " + input.Certification + "\nMOQ: " + input.MOQ);
+ p.put("show_in_storefront", true);
+ v = Map();
+ v.put("rate", "0");
+ v.put("sku", node);
+ v.put("status", "active");
+ variants = List(); variants.add(v);
+ p.put("variants", variants);
  h = Map(); h.put("X-com-zoho-store-organizationid","{{COMMERCE_ORG_ID}}");
+ h.put("Content-Type","application/json");
  if(input.Commerce_Product_ID == null || input.Commerce_Product_ID == "")
  {
-  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products" type:POST parameters:body.toString() headers:h connection:"commerce_oauth"];
+  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products" type:POST body:p.toString() headers:h connection:"commerce_oauth"];
  }
  else
  {
-  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products/" + input.Commerce_Product_ID type:PUT parameters:body.toString() headers:h connection:"commerce_oauth"];
+  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products/" + input.Commerce_Product_ID type:PUT body:p.toString() headers:h connection:"commerce_oauth"];
  }
  // Map ID only after confirming current tenant's response JSON shape.
  if(resp.get("code") == 0 && resp.get("product") != null)
