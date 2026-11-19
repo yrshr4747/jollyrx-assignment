@@ -1,5 +1,5 @@
 // Plant_Vault on success; connection jollyrx_commerce_masked_catalog_sync;
-// configure India DC base URL/org ID.
+// India data center endpoint. Set the organization ID privately in the live Creator workflow.
 // Required Commerce API fields (name/url/variants) are included. Only masked
 // catalog data and the Node ID SKU enter the product payload. Rate is zero for
 // quote-only items; hide price/cart in the storefront and verify before publish.
@@ -23,14 +23,14 @@ try
  h.put("Content-Type","application/json");
  if(input.Commerce_Product_ID == null || input.Commerce_Product_ID == "")
  {
-  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products" type:POST body:p.toString() headers:h connection:"jollyrx_commerce_masked_catalog_sync"];
+  resp = invokeurl [url:"https://commerce.zoho.in/store/api/v1/products" type:POST body:p.toString() headers:h connection:"jollyrx_commerce_masked_catalog_sync"];
  }
  else
  {
-  resp = invokeurl [url:"{{COMMERCE_BASE_URL}}/store/api/v1/products/" + input.Commerce_Product_ID type:PUT body:p.toString() headers:h connection:"jollyrx_commerce_masked_catalog_sync"];
+  resp = invokeurl [url:"https://commerce.zoho.in/store/api/v1/products/" + input.Commerce_Product_ID type:PUT body:p.toString() headers:h connection:"jollyrx_commerce_masked_catalog_sync"];
  }
- // Map ID only after confirming current tenant's response JSON shape.
- if(resp.get("code") == 0 && resp.get("product") != null)
+ // Zoho returns code=0 and product.product_id on success.
+ if(resp.get("code") == 0 && resp.get("product") != null && resp.get("product").get("product_id") != null)
  { input.Commerce_Product_ID = resp.get("product").get("product_id"); input.Sync_Status = "Synced"; }
  else { input.Sync_Status = "Failed: inspect workflow log"; info resp; }
 }
