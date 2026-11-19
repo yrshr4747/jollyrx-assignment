@@ -13,6 +13,6 @@ for i,u in enumerate(urls):
  try:subprocess.run(['curl','-fsSL',u,'-o',str(pathlib.Path(out)/str(i))],check=True,timeout=20,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
  except Exception:pass
 PY
-P=("Blue Dune Formulations Pvt Ltd" "Plot 18, Pharma Growth Centre" "DL-HIM-2048" "Gujarat Meridian Labs Pvt Ltd" "Survey 42, Sanand Industrial Estate" "DL-GJ-7712" "Himalaya Pine Therapeutics Pvt Ltd" "Unit 6, Kala Amb Industrial Area" "DL-HP-9031" "Metformin" "Amoxicillin" "Paracetamol" "Site_Master_File" "SMF")
+P=("Demo Biopharma BD" "Synthetic Demo Address, Dhaka, Bangladesh" "DEMO-LIC-0001" "Demo Biopharma GJ" "Synthetic Demo Address, Ahmedabad, India" "DEMO-LIC-0002" "Demo Biopharma HP" "Synthetic Demo Address, Shimla, India" "DEMO-LIC-0003" "Site_Master_File" "NODE-BD-01_SMF_dummy.pdf" "NODE-GJ-02_SMF_dummy.pdf" "NODE-HP-03_SMF_dummy.pdf" "Molecule")
 fail=0; for p in "${P[@]}"; do if rg -n -i -F -- "$p" "$W"; then echo "LEAK: $p"; fail=1; fi; done
 ((fail==0)) && echo "No canary found in bounded public crawl." || exit 1

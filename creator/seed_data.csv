@@ -1,4 +1,4 @@
 Real_Plant_Name,Factory_Address,Drug_License,Region_Code,Dosage_Form,Certification,MOQ,Commerce_Product_ID,Sync_Status
-Demo Plant Alpha (synthetic),Synthetic address for demonstration only,DEMO-LIC-0001,BD,Tablets,WHO-GMP,5000,,Pending
-Demo Plant Beta (synthetic),Synthetic address for demonstration only,DEMO-LIC-0002,GJ,Injectables,Schedule M,2000,,Pending
-Demo Plant Gamma (synthetic),Synthetic address for demonstration only,DEMO-LIC-0003,HP,Tablets,WHO-GMP,10000,,Pending
+Demo Biopharma BD,"Synthetic Demo Address, Dhaka, Bangladesh",DEMO-LIC-0001,BD,Tablets,WHO-GMP,5000,,Pending
+Demo Biopharma GJ,"Synthetic Demo Address, Ahmedabad, India",DEMO-LIC-0002,GJ,Injectables,Schedule M,7500,,Pending
+Demo Biopharma HP,"Synthetic Demo Address, Shimla, India",DEMO-LIC-0003,HP,Tablets,WHO-GMP,10000,,Pending
