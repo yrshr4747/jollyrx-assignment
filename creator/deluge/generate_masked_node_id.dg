@@ -1,0 +1,20 @@
+// Plant_Vault > Workflow > On Success (create only).
+// Region_Code is private helper data and is never sent to Commerce.
+// This count-based allocator fits the isolated 3-record demo; production
+// should use an atomic counter to avoid collisions during concurrent creates.
+region = ifnull(input.Region_Code, "").trim().toUpperCase();
+if(!region.matches("^[A-Z]{2}$"))
+{
+	info "Invalid region code; Masked_Node_ID was not generated.";
+}
+else
+{
+	prior = Plant_Vault[Region_Code == region && ID != input.ID].count();
+	sequence = prior + 1;
+	sequenceText = sequence.toString();
+	if(sequence < 10)
+	{
+		sequenceText = "0" + sequenceText;
+	}
+	input.Masked_Node_ID = "NODE-" + region + "-" + sequenceText;
+}
