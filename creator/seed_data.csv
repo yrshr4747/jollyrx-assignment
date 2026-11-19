@@ -1,4 +1,4 @@
-Real_Plant_Name,Factory_Address,Drug_License,Region_Code,Molecule,Dosage_Form,Certification,MOQ,Commerce_Product_ID,Sync_Status
-Blue Dune Formulations Pvt Ltd,"Plot 18, Pharma Growth Centre, Baddi, Himachal Pradesh, India",DL-HIM-2048,BD,Metformin,Tablets,WHO-GMP,5000,,Pending
-Gujarat Meridian Labs Pvt Ltd,"Survey 42, Sanand Industrial Estate, Ahmedabad, Gujarat, India",DL-GJ-7712,GJ,Amoxicillin,Injectables,Schedule M,2000,,Pending
-Himalaya Pine Therapeutics Pvt Ltd,"Unit 6, Kala Amb Industrial Area, Sirmaur, Himachal Pradesh, India",DL-HP-9031,HP,Paracetamol,Tablets,WHO-GMP,10000,,Pending
+Real_Plant_Name,Factory_Address,Drug_License,Region_Code,Dosage_Form,Certification,MOQ,Commerce_Product_ID,Sync_Status
+Demo Plant Alpha (synthetic),Synthetic address for demonstration only,DEMO-LIC-0001,BD,Tablets,WHO-GMP,5000,,Pending
+Demo Plant Beta (synthetic),Synthetic address for demonstration only,DEMO-LIC-0002,GJ,Injectables,Schedule M,2000,,Pending
+Demo Plant Gamma (synthetic),Synthetic address for demonstration only,DEMO-LIC-0003,HP,Tablets,WHO-GMP,10000,,Pending
