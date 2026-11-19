@@ -1,6 +1,7 @@
 /* Theme selectors are starters: inspect actual Commerce DOM. Hide from first paint. */
 :root{--jrx-navy:#101a31;--jrx-navy-deep:#0a1122;--jrx-panel:#17233d;--jrx-cyan:#22c4f2;--jrx-magenta:#e63bd8;--jrx-text:#f7f9ff;--jrx-muted:#aebbd2}
-html:not(.jrx-ready) .price,html:not(.jrx-ready) [class*="price"],.product-price,.compare-at-price,[class*="compare-price"],.quantity-selector,.quantity,button[name*="add"],[class*="add-to-cart"],[class*="buy-now"],.cart-icon,[class*="cart-icon"],.quick-view [class*="price"],.search-results [class*="price"]{display:none!important}
+/* Quote-only storefront: suppress all commerce purchase surfaces on every page. */
+body .price,body [class*="price"],body [class*="Price"],.product-price,.compare-at-price,[class*="compare-price"],.quantity-selector,.quantity,button[name*="add"],[class*="add-to-cart"],[class*="buy-now"],.cart-icon,[class*="cart-icon"],a[href*="/cart"],button[aria-label*="cart" i],.quick-view [class*="price"],.search-results [class*="price"]{display:none!important}
 body{background:radial-gradient(ellipse at 50% -20%,#24385c 0,var(--jrx-navy) 58%,var(--jrx-navy-deep) 100%);color:var(--jrx-text);min-height:100vh}
 header,.site-header,footer{background:rgba(10,17,34,.94);border-bottom:1px solid #22c4f244;backdrop-filter:blur(12px)}
 .jrx-wordmark{font-size:clamp(1.3rem,3vw,2rem);font-weight:900;letter-spacing:.08em;color:#fff;text-decoration:none}.jrx-wordmark span{color:var(--jrx-cyan)}
