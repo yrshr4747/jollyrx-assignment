@@ -1,7 +1,7 @@
 // Plant_Vault > Workflow > On Success (create only).
 // Region_Code is private helper data and is never sent to Commerce.
-// This count-based allocator fits the isolated 3-record demo; production
-// should use an atomic counter to avoid collisions during concurrent creates.
+// Global count yields the demo sequence BD-01, GJ-02, HP-03. This fits the
+// isolated demo; production should use an atomic counter to avoid races.
 region = ifnull(input.Region_Code, "").trim().toUpperCase();
 if(!region.matches("^[A-Z]{2}$"))
 {
@@ -9,7 +9,7 @@ if(!region.matches("^[A-Z]{2}$"))
 }
 else
 {
-	prior = Plant_Vault[Region_Code == region && ID != input.ID].count();
+	prior = Plant_Vault[ID != input.ID].count();
 	sequence = prior + 1;
 	sequenceText = sequence.toString();
 	if(sequence < 10)
